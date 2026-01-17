@@ -1,0 +1,216 @@
+"use client"
+
+import type * as React from "react"
+import { cn } from "@/lib/utils"
+import { Twitter, Github, Linkedin, Instagram } from "lucide-react"
+import { motion } from "framer-motion"
+
+interface SocialLink {
+  icon: React.ElementType
+  href: string
+}
+
+interface TeamMember {
+  name: string
+  designation: string
+  imageSrc: string
+  socialLinks?: SocialLink[]
+}
+
+const teamMembers: TeamMember[] = [
+  {
+    name: "Alex Chen",
+    designation: "President & Founder",
+    imageSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    socialLinks: [
+      { icon: Twitter, href: "#" },
+      { icon: Linkedin, href: "#" },
+    ],
+  },
+  {
+    name: "Sarah Martinez",
+    designation: "Technical Lead",
+    imageSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+    socialLinks: [
+      { icon: Github, href: "#" },
+      { icon: Twitter, href: "#" },
+    ],
+  },
+  {
+    name: "Jordan Williams",
+    designation: "Events Director",
+    imageSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+    socialLinks: [
+      { icon: Linkedin, href: "#" },
+      { icon: Instagram, href: "#" },
+    ],
+  },
+  {
+    name: "Emma Thompson",
+    designation: "Community Manager",
+    imageSrc: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+    socialLinks: [
+      { icon: Twitter, href: "#" },
+      { icon: Instagram, href: "#" },
+    ],
+  },
+  {
+    name: "Michael Park",
+    designation: "Security Researcher",
+    imageSrc: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    socialLinks: [
+      { icon: Github, href: "#" },
+      { icon: Linkedin, href: "#" },
+    ],
+  },
+  {
+    name: "Lisa Wang",
+    designation: "Challenge Designer",
+    imageSrc: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
+    socialLinks: [
+      { icon: Twitter, href: "#" },
+      { icon: Github, href: "#" },
+    ],
+  },
+  {
+    name: "David Kim",
+    designation: "Infrastructure Lead",
+    imageSrc: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face",
+    socialLinks: [
+      { icon: Github, href: "#" },
+      { icon: Linkedin, href: "#" },
+    ],
+  },
+  {
+    name: "Priya Patel",
+    designation: "Outreach Coordinator",
+    imageSrc: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop&crop=face",
+    socialLinks: [
+      { icon: Instagram, href: "#" },
+      { icon: Twitter, href: "#" },
+    ],
+  },
+]
+
+const mainSocialLinks = [
+  { icon: Twitter, href: "#" },
+  { icon: Instagram, href: "#" },
+  { icon: Github, href: "#" },
+  { icon: Linkedin, href: "#" },
+]
+
+export function TeamSection() {
+  return (
+    <section className="relative w-full overflow-hidden bg-black py-24 md:py-32 border-t border-white/10">
+      <div className="container mx-auto px-6">
+        {/* Background Grid */}
+        <div className="absolute inset-0 z-0 opacity-5">
+          <svg className="h-full w-full" fill="none">
+            <defs>
+              <pattern id="grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M40 0L0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-white" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+        </div>
+
+        {/* Header Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="relative z-10 flex w-full flex-col items-center justify-between gap-6 mb-8 md:flex-row md:items-start"
+        >
+          <div className="text-center md:text-left">
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-500">
+              <span className="text-white block text-lg sm:text-xl md:text-2xl font-medium tracking-[0.2em] mb-2">
+                O U R
+              </span>
+              CREATIVE TEAM
+            </h2>
+            <p className="max-w-[600px] text-gray-400 mt-4 text-lg">
+              Meet the passionate individuals who make WLWJ possible. Our diverse team brings together expertise in
+              cybersecurity, event management, and community building.
+            </p>
+          </div>
+          <div className="flex flex-col items-center gap-4 md:items-end">
+            <span className="text-2xl font-bold text-white font-mono tracking-wider">WLWJ</span>
+          </div>
+        </motion.div>
+
+        {/* Main Social Links */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="relative z-10 flex w-full items-center justify-center gap-4 py-6 mb-8"
+        >
+          {mainSocialLinks.map((link, index) => (
+            <a
+              key={index}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-white transition-colors duration-300"
+            >
+              <link.icon className="h-5 w-5" />
+            </a>
+          ))}
+          <span className="text-gray-500 text-sm ml-2">www.wlwj.org</span>
+        </motion.div>
+
+        {/* Team Members Grid - 8 members in 4 columns */}
+        <div className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {teamMembers.map((member, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05, duration: 0.4 }}
+              className={cn(
+                "group relative flex flex-col items-center justify-end overflow-hidden rounded-2xl p-6 text-center transition-all duration-300 will-change-transform hover:scale-[1.02]",
+                "bg-white/[0.03] border border-white/10 hover:border-white/20 hover:bg-white/[0.06]",
+              )}
+            >
+              {/* Background wave animation on hover */}
+              <div className="absolute bottom-0 left-0 right-0 h-1/2 origin-bottom scale-y-0 transform rounded-t-full bg-gradient-to-t from-white/10 to-transparent transition-transform duration-500 group-hover:scale-y-100" />
+
+              {/* Member Image */}
+              <div className="relative z-10 h-28 w-28 overflow-hidden rounded-full border-2 border-white/10 bg-white/5 transition-all duration-300 group-hover:border-white/30 group-hover:scale-105">
+                <img
+                  src={member.imageSrc || "/placeholder.svg"}
+                  alt={member.name}
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+              </div>
+
+              <h3 className="relative z-10 mt-4 text-lg font-semibold text-white">{member.name}</h3>
+              <p className="relative z-10 text-sm text-gray-400">{member.designation}</p>
+
+              {/* Social Links */}
+              {member.socialLinks && member.socialLinks.length > 0 && (
+                <div className="relative z-10 mt-4 flex gap-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  {member.socialLinks.map((link, linkIndex) => (
+                    <a
+                      key={linkIndex}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-500 hover:text-white transition-colors duration-200"
+                    >
+                      <link.icon className="h-4 w-4" />
+                    </a>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
