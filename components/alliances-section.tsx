@@ -13,38 +13,38 @@ const logos: Logo[] = [
   {
     id: "cisco",
     name: "Cisco Networking Academy",
-    image: "	https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cisco_logo.svg/120px-Cisco_logo.svg.png",
-    className: "h-8 w-auto invert",
+    image: "/11.png",
+    className: "h-18 w-auto",
   },
   {
-    id: "hackthebox",
-    name: "HackTheBox",
-    image: "https://www.shadcnblocks.com/images/block/logos/vercel.svg",
-    className: "h-7 w-auto invert",
+    id: "uet",
+    name: "UET Lahore",
+    image: "/9.png",
+    className: "h-18 w-auto",
   },
   {
-    id: "owasp",
-    name: "OWASP Foundation",
-    image: "https://www.shadcnblocks.com/images/block/logos/react.png",
-    className: "h-8 w-auto invert",
+    id: "teknofest",
+    name: "Teknofest",
+    image: "/1.png",
+    className: "h-18 w-auto",
   },
   {
-    id: "cybersec",
-    name: "CyberSec Labs",
-    image: "https://www.shadcnblocks.com/images/block/logos/supabase.svg",
-    className: "h-7 w-auto invert",
+    id: "nanotechx",
+    name: "NANOTECHX",
+    image: "/2.png",
+    className: "h-18 w-auto",
   },
   {
-    id: "techcorp",
-    name: "TechCorp University",
-    image: "https://www.shadcnblocks.com/images/block/logos/tailwind.svg",
-    className: "h-5 w-auto invert",
+    id: "acmcyber",
+    name: "ACM Cyber FAST",
+    image: "/3.png",
+    className: "h-18 w-auto",
   },
   {
-    id: "digital",
-    name: "Digital Shield Foundation",
-    image: "https://www.shadcnblocks.com/images/block/logos/shadcn-ui.svg",
-    className: "h-7 w-auto invert",
+    id: "acmbahria",
+    name: "ACM Bahria",
+    image: "/4.png",
+    className: "h-18 w-auto",
   },
 ]
 
@@ -60,7 +60,7 @@ export function AlliancesSection() {
     track.innerHTML = items + items
 
     let scrollAmount = 0
-    const speed = 5
+    const speed = 3
 
     const animate = () => {
       scrollAmount += speed

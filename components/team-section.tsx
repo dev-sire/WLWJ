@@ -19,72 +19,72 @@ interface TeamMember {
 
 const teamMembers: TeamMember[] = [
   {
-    name: "Alex Chen",
-    designation: "President & Founder",
-    imageSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    name: "Abdul Wasay Khan",
+    designation: "Farigh 1",
+    imageSrc: "/wasay-2.jpg",
     socialLinks: [
       { icon: Twitter, href: "#" },
       { icon: Linkedin, href: "#" },
     ],
   },
   {
-    name: "Sarah Martinez",
-    designation: "Technical Lead",
-    imageSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+    name: "Rabia Ishtiaq",
+    designation: "Farigh 2",
+    imageSrc: "/rabia.jpg",
     socialLinks: [
       { icon: Github, href: "#" },
       { icon: Twitter, href: "#" },
     ],
   },
   {
-    name: "Jordan Williams",
-    designation: "Events Director",
-    imageSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+    name: "Hafsah Anwaar Ali",
+    designation: "Farigh 3",
+    imageSrc: "/hafsa.jpg",
     socialLinks: [
       { icon: Linkedin, href: "#" },
       { icon: Instagram, href: "#" },
     ],
   },
   {
-    name: "Emma Thompson",
-    designation: "Community Manager",
-    imageSrc: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+    name: "Ammara Qazi",
+    designation: "Farigh 4",
+    imageSrc: "/ammara.jpg",
     socialLinks: [
       { icon: Twitter, href: "#" },
       { icon: Instagram, href: "#" },
     ],
   },
   {
-    name: "Michael Park",
-    designation: "Security Researcher",
-    imageSrc: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    name: "Ubaid Raza",
+    designation: "Farigh 5",
+    imageSrc: "/ubaid.jpg",
     socialLinks: [
       { icon: Github, href: "#" },
       { icon: Linkedin, href: "#" },
     ],
   },
   {
-    name: "Lisa Wang",
-    designation: "Challenge Designer",
-    imageSrc: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
+    name: "Syed Usaiym Junaid",
+    designation: "Farigh 6",
+    imageSrc: "/usaiym.jpg",
     socialLinks: [
       { icon: Twitter, href: "#" },
       { icon: Github, href: "#" },
     ],
   },
   {
-    name: "David Kim",
-    designation: "Infrastructure Lead",
-    imageSrc: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face",
+    name: "Sofia Asif",
+    designation: "Farigh 7",
+    imageSrc: "/sofia.jpg",
     socialLinks: [
       { icon: Github, href: "#" },
       { icon: Linkedin, href: "#" },
     ],
   },
   {
-    name: "Priya Patel",
-    designation: "Outreach Coordinator",
-    imageSrc: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop&crop=face",
+    name: "Aman Shahid",
+    designation: "Farigh 8",
+    imageSrc: "/aman.jpg",
     socialLinks: [
       { icon: Instagram, href: "#" },
       { icon: Twitter, href: "#" },
