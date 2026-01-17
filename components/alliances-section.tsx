@@ -1,8 +1,6 @@
 "use client"
 
-import AutoScroll from "embla-carousel-auto-scroll"
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 
 interface Logo {
   id: string
@@ -15,7 +13,7 @@ const logos: Logo[] = [
   {
     id: "cisco",
     name: "Cisco Networking Academy",
-    image: "https://www.shadcnblocks.com/images/block/logos/nextjs.svg",
+    image: "	https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cisco_logo.svg/120px-Cisco_logo.svg.png",
     className: "h-8 w-auto invert",
   },
   {
@@ -51,57 +49,39 @@ const logos: Logo[] = [
 ]
 
 export function AlliancesSection() {
-  const [api, setApi] = useState<any>(null);
-  const autoScrollRef = useRef<ReturnType<typeof AutoScroll> | null>(null);
-  const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const isPausedRef = useRef(false);
+  const trackRef = useRef<HTMLDivElement>(null)
 
-  // Create the auto-scroll plugin instance
-  const autoScrollPlugin = useCallback(() => {
-    const plugin = AutoScroll({ 
-      playOnInit: true, 
-      speed: 0.8,
-      stopOnInteraction: false,
-      stopOnMouseEnter: false,
-    });
-    autoScrollRef.current = plugin;
-    return plugin;
-  }, []);
-
-  // Cleanup timeout on unmount
   useEffect(() => {
-    return () => {
-      if (resumeTimeoutRef.current) {
-        clearTimeout(resumeTimeoutRef.current);
+    const track = trackRef.current
+    if (!track) return
+
+    // Clone the track content for seamless loop
+    const items = track.innerHTML
+    track.innerHTML = items + items
+
+    let scrollAmount = 0
+    const speed = 5
+
+    const animate = () => {
+      scrollAmount += speed
+      
+      // Get half the width (one full set of logos)
+      const halfWidth = track.scrollWidth / 2
+      
+      // Reset when we've scrolled through one set
+      if (scrollAmount >= halfWidth) {
+        scrollAmount = 0
       }
-    };
-  }, []);
-
-  const handleLogoClick = useCallback(() => {
-    if (!autoScrollRef.current || isPausedRef.current) return;
-
-    // Mark as paused to prevent multiple triggers
-    isPausedRef.current = true;
-
-    // Stop auto-scroll
-    autoScrollRef.current.stop();
-
-    // Clear any existing timeout
-    if (resumeTimeoutRef.current) {
-      clearTimeout(resumeTimeoutRef.current);
+      
+      track.style.transform = `translateX(-${scrollAmount}px)`
+      requestAnimationFrame(animate)
     }
 
-    // Resume after 1 second
-    resumeTimeoutRef.current = setTimeout(() => {
-      if (autoScrollRef.current) {
-        autoScrollRef.current.play();
-      }
-      isPausedRef.current = false;
-    }, 1000);
-  }, []);
+    requestAnimationFrame(animate)
+  }, [])
 
   return (
-    <section className="py-24 md:py-32 relative border-t border-white/10 bg-black overflow-hidden">
+    <section className="py-24 md:py-32 relative border-t border-white/10 overflow-hidden">
       <div className="container mx-auto px-6 flex flex-col items-center text-center">
         <span className="font-mono text-xs tracking-[0.3em] text-gray-600 uppercase block mb-3">
           // ALLIED NETWORKS
@@ -114,40 +94,35 @@ export function AlliancesSection() {
         </p>
       </div>
 
-      <div className="relative mx-auto flex items-center justify-center lg:max-w-5xl">
-      <Carousel 
-          opts={{ loop: true, dragFree: true }} 
-          plugins={[autoScrollPlugin()]}
-          setApi={setApi}
+      <div className="relative mx-auto overflow-hidden">
+        <div 
+          ref={trackRef}
+          className="flex items-center will-change-transform"
         >
-          <CarouselContent className="ml-0">
-            {logos.map((logo) => (
-              <CarouselItem
-                key={logo.id}
-                className="flex basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 justify-center pl-0"
-              >
-                <div
-                  onClick={handleLogoClick}
-                  className="mx-8 flex shrink-0 flex-col items-center justify-center gap-3 group cursor-pointer"
-                >
-                  <div className="p-4 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 group-hover:bg-white/10 group-hover:border-white/20">
-                    <img
-                      src={logo.image || "/placeholder.svg"}
-                      alt={logo.name}
-                      className={logo.className}
-                    />
-                  </div>
-                  <span className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors whitespace-nowrap">
-                    {logo.name}
-                  </span>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black to-transparent pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black to-transparent pointer-events-none" />
+          {logos.map((logo, index) => (
+            <div
+              key={`${logo.id}-${index}`}
+              className="flex shrink-0 flex-col items-center justify-center gap-3 group cursor-pointer mx-8 p-2"
+            >
+              <div className="p-4 rounded-xl bg-black border border-white/20 transition-all duration-300 group-hover:bg-white/10 group-hover:border-white/30 group-hover:scale-105">
+                <img
+                  src={logo.image}
+                  alt={logo.name}
+                  className={logo.className}
+                  draggable={false}
+                />
+              </div>
+              <span className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors whitespace-nowrap">
+                {logo.name}
+              </span>
+            </div>
+          ))}
+        </div>
+        
+        {/* Gradient overlays */}
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black via-black/50 to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black via-black/50 to-transparent pointer-events-none z-10" />
       </div>
     </section>
-  );
+  )
 }

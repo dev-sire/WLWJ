@@ -101,7 +101,7 @@ const mainSocialLinks = [
 
 export function TeamSection() {
   return (
-    <section className="relative w-full overflow-hidden bg-black py-24 md:py-32 border-t border-white/10">
+    <section className="relative w-full overflow-hidden py-24 md:py-32 border-t border-white/10 z-2">
       <div className="container mx-auto px-6">
         {/* Background Grid */}
         <div className="absolute inset-0 z-0 opacity-5">
@@ -173,7 +173,7 @@ export function TeamSection() {
               transition={{ delay: index * 0.05, duration: 0.4 }}
               className={cn(
                 "group relative flex flex-col items-center justify-end overflow-hidden rounded-2xl p-6 text-center transition-all duration-300 will-change-transform hover:scale-[1.02]",
-                "bg-white/[0.03] border border-white/10 hover:border-white/20 hover:bg-white/[0.06]",
+                "bg-black border border-white/20 hover:border-white/35 hover:bg-white/8",
               )}
             >
               {/* Background wave animation on hover */}

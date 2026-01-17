@@ -72,8 +72,8 @@ function VisionCard({
       <div
         className={`
           relative h-full rounded-2xl p-6 md:p-8 transition-all duration-300
-          ${isPrimary ? "bg-white/[0.06] border border-white/15" : "bg-white/[0.03] border border-white/10"}
-          ${isHovered ? "bg-white/[0.08] border-white/25" : ""}
+          ${isPrimary ? "bg-white/6 border border-white/15" : "bg-white/6 border border-white/10"}
+          ${isHovered ? "bg-white/8 border-white/25" : ""}
         `}
       >
         <div
@@ -117,7 +117,7 @@ export function VisionSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   return (
-    <section className="py-24 md:py-32 relative bg-black overflow-hidden">
+    <section className="py-24 md:py-32 relative overflow-hidden z-2">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]">
           <div className="absolute inset-0 border border-white/[0.03] rounded-full" />

@@ -1,28 +1,28 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { motion } from "framer-motion"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { motion, Variants } from "framer-motion"
 import { ArrowRight, Shield } from "lucide-react"
 
 const StarfieldCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [glowIntensity, setGlowIntensity] = useState(0)
-  const speedRef = useRef(2)
+  const speedRef = useRef(10)
+  const mouseProximityRef = useRef(0)
+  const animationFrameRef = useRef<number>(10)
 
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const ctx = canvas.getContext("2d")
+    const ctx = canvas.getContext("2d", { alpha: false })
     if (!ctx) return
 
-    let animationFrameId: number
     let stars: Star[] = []
     const numStars = 600
 
     const resizeCanvas = () => {
+      if (!canvas) return
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
     }
@@ -34,6 +34,13 @@ const StarfieldCanvas = () => {
       pz: number
 
       constructor() {
+        if (!canvas) {
+          this.x = 0
+          this.y = 0
+          this.z = 0
+          this.pz = 0
+          return
+        }
         this.x = Math.random() * canvas.width - canvas.width / 2
         this.y = Math.random() * canvas.height - canvas.height / 2
         this.z = Math.random() * canvas.width
@@ -41,6 +48,7 @@ const StarfieldCanvas = () => {
       }
 
       update() {
+        if (!canvas) return
         this.z = this.z - speedRef.current
         if (this.z < 1) {
           this.z = canvas.width
@@ -51,6 +59,7 @@ const StarfieldCanvas = () => {
       }
 
       draw() {
+        if (!canvas || !ctx) return
         const sx = (this.x / this.z) * (canvas.width / 2) + canvas.width / 2
         const sy = (this.y / this.z) * (canvas.height / 2) + canvas.height / 2
 
@@ -78,27 +87,42 @@ const StarfieldCanvas = () => {
     }
 
     const animate = () => {
+      if (!canvas || !ctx) return
+      
       ctx.fillStyle = "rgba(0, 0, 0, 0.15)"
       ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      // Smoothly interpolate speed
+      const targetSpeed = 2 + mouseProximityRef.current * 15
+      speedRef.current += (targetSpeed - speedRef.current) * 0.1
 
       stars.forEach((star) => {
         star.update()
         star.draw()
       })
 
-      animationFrameId = requestAnimationFrame(animate)
+      animationFrameRef.current = requestAnimationFrame(animate)
     }
 
+    // Throttle mouse movement updates
+    let rafId: number | null = null
     const handleMouseMove = (event: MouseEvent) => {
-      const centerX = window.innerWidth / 2
-      const centerY = window.innerHeight / 2
-      const distX = Math.abs(event.clientX - centerX)
-      const distY = Math.abs(event.clientY - centerY)
-      const dist = Math.sqrt(distX * distX + distY * distY)
-      const maxDist = Math.sqrt(centerX * centerX + centerY * centerY)
-      const proximity = 1 - dist / maxDist
-      speedRef.current = 2 + proximity * 15
-      setGlowIntensity(proximity)
+      if (rafId) return
+      
+      rafId = requestAnimationFrame(() => {
+        const centerX = window.innerWidth / 2
+        const centerY = window.innerHeight / 2
+        const distX = Math.abs(event.clientX - centerX)
+        const distY = Math.abs(event.clientY - centerY)
+        const dist = Math.sqrt(distX * distX + distY * distY)
+        const maxDist = Math.sqrt(centerX * centerX + centerY * centerY)
+        const proximity = 1 - dist / maxDist
+        
+        mouseProximityRef.current = proximity
+        setGlowIntensity(proximity)
+        
+        rafId = null
+      })
     }
 
     window.addEventListener("resize", resizeCanvas)
@@ -109,7 +133,12 @@ const StarfieldCanvas = () => {
     animate()
 
     return () => {
-      cancelAnimationFrame(animationFrameId)
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
+      }
+      if (rafId) {
+        cancelAnimationFrame(rafId)
+      }
       window.removeEventListener("resize", resizeCanvas)
       window.removeEventListener("mousemove", handleMouseMove)
     }
@@ -119,17 +148,20 @@ const StarfieldCanvas = () => {
     <>
       <canvas ref={canvasRef} className="absolute inset-0 z-0 w-full h-full" />
       <div
-        className="absolute inset-0 z-[1] pointer-events-none transition-opacity duration-500"
+        className="absolute inset-0 z-1 pointer-events-none transition-opacity duration-500"
         style={{
           background: `radial-gradient(circle at center, rgba(255,255,255,${glowIntensity * 0.12}) 0%, transparent 50%)`,
         }}
       />
+      {/* Ambient nebula effects */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
     </>
   )
 }
 
 export function HeroSection() {
-  const fadeUpVariants = {
+  const fadeUpVariants: Variants = {
     hidden: { opacity: 0, y: 15 },
     visible: (i: number) => ({
       opacity: 1,
@@ -143,11 +175,20 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative h-screen w-full bg-black flex flex-col items-center justify-center overflow-hidden">
+    <section className="relative h-screen w-full bg-black flex flex-col items-center justify-center overflow-hidden z-2">
       <StarfieldCanvas />
 
       {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black z-10" />
+      <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-black z-10" />
+      
+      {/* Subtle grid overlay for depth */}
+      <div className="absolute inset-0 z-10 opacity-[0.02]" 
+           style={{
+             backgroundImage: `linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                               linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+             backgroundSize: '50px 50px'
+           }} 
+      />
 
       {/* Content */}
       <div className="relative z-20 text-center p-6">
@@ -171,7 +212,7 @@ export function HeroSection() {
           variants={fadeUpVariants}
           initial="hidden"
           animate="visible"
-          className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-gray-600"
+          className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-linear-to-b from-white via-white to-gray-600"
         >
           WLWJ
         </motion.h1>
@@ -193,37 +234,30 @@ export function HeroSection() {
           animate="visible"
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Button
-            asChild
-            size="lg"
-            className="bg-white text-black font-semibold hover:bg-gray-200 transition-colors duration-200 px-8"
+          <button
+            className="bg-white text-black font-semibold hover:bg-gray-200 transition-colors duration-200 px-8 py-3 rounded-md text-base flex items-center gap-2"
           >
-            <Link href="/ctf/pokemon" className="flex items-center gap-2">
-              View Events
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-white/20 text-white hover:bg-white/10 px-8 bg-transparent"
+            View Events
+            <ArrowRight className="h-5 w-5" />
+          </button>
+          <button
+            className="border border-white/20 text-white hover:bg-white/10 px-8 py-3 rounded-md text-base bg-transparent transition-colors duration-200"
           >
-            <Link href="/contact">Contact Us</Link>
-          </Button>
+            Contact Us
+          </button>
         </motion.div>
       </div>
 
-      {/* Scroll indicator - simplified animation */}
+      {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20">
         <motion.div
           animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2"
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="w-1.5 h-1.5 bg-white rounded-full"
           />
         </motion.div>

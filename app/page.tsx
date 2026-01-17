@@ -5,17 +5,22 @@ import { EventsSection } from "@/components/events-section"
 import { AlliancesSection } from "@/components/alliances-section"
 import { VisionSection } from "@/components/vision-section"
 import { TeamSection } from "@/components/team-section"
+import { SpatialBackground } from "@/components/spatial-background"
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen noise">
-      <Navbar />
-      <HeroSection />
-      <EventsSection />
-      <AlliancesSection />
-      <VisionSection />
-      <TeamSection />
-      <Footer />
+    <main className="min-h-screen relative bg-black">
+      {/* Background animation layer */}
+      <SpatialBackground />
+      
+      {/* Content layer */}
+        <Navbar />
+        <HeroSection />
+        <EventsSection />
+        <AlliancesSection />
+        <VisionSection />
+        <TeamSection />
+        <Footer />
     </main>
   )
 }

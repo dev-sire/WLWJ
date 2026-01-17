@@ -71,7 +71,7 @@ const stats = [
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-white/10 bg-black">
+    <footer className="relative border-t border-white/10 z-2">
       <div className="border-b border-white/10 py-8">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">

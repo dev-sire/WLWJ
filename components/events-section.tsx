@@ -35,11 +35,11 @@ const events = [
 
 export function EventsSection() {
   return (
-    <section className="py-24 md:py-32 relative bg-black overflow-hidden">
+    <section className="py-24 md:py-32 relative overflow-hidden z-2">
       <motion.div
         className="absolute inset-0 pointer-events-none"
         animate={{ rotate: -360 }}
-        transition={{ duration: 120, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+        transition={{ duration: 0.3, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] border border-white/[0.02] rounded-full" />
       </motion.div>
@@ -71,7 +71,7 @@ export function EventsSection() {
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
               <Link href={event.href} className="block group">
-                <div className="bg-white/5 border border-white/10 hover:border-white/25 rounded-2xl p-6 h-full relative overflow-hidden transition-all duration-500 hover:bg-white/[0.08]">
+                <div className="bg-black border border-white/20 hover:border-white/35 rounded-2xl p-6 h-full relative overflow-hidden transition-all duration-100 hover:bg-white/[0.08]">
                   <div className="relative z-10">
                     <div className="flex items-start justify-between mb-4">
                       <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/15 transition-colors">
@@ -79,7 +79,7 @@ export function EventsSection() {
                       </div>
                       <ArrowUpRight
                         size={20}
-                        className="text-gray-600 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300"
+                        className="text-gray-600 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-100"
                       />
                     </div>
 

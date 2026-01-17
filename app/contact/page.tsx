@@ -145,7 +145,7 @@ export default function ContactPage() {
       <Navbar />
 
       {/* Hero Section with Orbit Animation */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-42 pb-20 overflow-hidden">
         <OrbitAnimation />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
 
