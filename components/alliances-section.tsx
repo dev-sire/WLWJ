@@ -119,7 +119,6 @@ export function AlliancesSection() {
           opts={{ loop: true, dragFree: true }} 
           plugins={[autoScrollPlugin()]}
           setApi={setApi}
-          className="w-full"
         >
           <CarouselContent className="ml-0">
             {logos.map((logo) => (
