@@ -30,7 +30,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Rabia Ishtiaq",
     designation: "Farigh 2",
-    imageSrc: "/rabia.jpg",
+    imageSrc: "/rabia.jpeg",
     socialLinks: [
       { icon: Github, href: "#" },
       { icon: Twitter, href: "#" },
@@ -48,7 +48,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Ammara Qazi",
     designation: "Farigh 4",
-    imageSrc: "/ammara.jpg",
+    imageSrc: "/ammara.jpeg",
     socialLinks: [
       { icon: Twitter, href: "#" },
       { icon: Instagram, href: "#" },
@@ -75,7 +75,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Sofia Asif",
     designation: "Farigh 7",
-    imageSrc: "/sofia.jpg",
+    imageSrc: "/sofia.jpeg",
     socialLinks: [
       { icon: Github, href: "#" },
       { icon: Linkedin, href: "#" },
