@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { HeroSection } from "@/components/hero-section"
+import HeroSection from "@/components/hero-section"
 import { EventsSection } from "@/components/events-section"
 import { AlliancesSection } from "@/components/alliances-section"
 import { VisionSection } from "@/components/vision-section"
