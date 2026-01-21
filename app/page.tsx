@@ -6,6 +6,7 @@ import { AlliancesSection } from "@/components/alliances-section"
 import { VisionSection } from "@/components/vision-section"
 import { TeamSection } from "@/components/team-section"
 import { SpatialBackground } from "@/components/spatial-background"
+import { SpaceGallerySection } from "@/components/circular-gallery"
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
         <HeroSection />
         <EventsSection />
         <AlliancesSection />
+        <SpaceGallerySection />
         <VisionSection />
         <TeamSection />
         <Footer />

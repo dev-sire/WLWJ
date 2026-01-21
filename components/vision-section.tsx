@@ -1,123 +1,52 @@
-"use client"
-
-import { motion } from "framer-motion"
-import { Shield, Target, Users, Zap } from "lucide-react"
-import { useState } from "react"
-
-const features = [
-  {
-    icon: Shield,
-    title: "Security First",
-    description: "Building robust cybersecurity skills through hands-on challenges and real-world scenarios.",
-    isPrimary: true,
-  },
-  {
-    icon: Target,
-    title: "Precision Training",
-    description: "Carefully crafted challenges that test and expand your technical capabilities.",
-    isPrimary: false,
-  },
-  {
-    icon: Users,
-    title: "Community Driven",
-    description: "A vibrant community of learners, mentors, and industry professionals.",
-    isPrimary: false,
-  },
-  {
-    icon: Zap,
-    title: "Cutting Edge",
-    description: "Stay ahead with challenges reflecting the latest cybersecurity trends and threats.",
-    isPrimary: false,
-  },
-]
-
-function VisionCard({
-  feature,
-  index,
-  isPrimary,
-  hoveredIndex,
-  setHoveredIndex,
-}: {
-  feature: (typeof features)[0]
-  index: number
-  isPrimary: boolean
-  hoveredIndex: number | null
-  setHoveredIndex: (i: number | null) => void
-}) {
-  const isHovered = hoveredIndex === index
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
-      onMouseEnter={() => setHoveredIndex(index)}
-      onMouseLeave={() => setHoveredIndex(null)}
-      className={`
-        relative group cursor-pointer will-change-transform
-        ${isPrimary ? "md:col-span-2 md:row-span-2" : ""}
-      `}
-    >
-      <div
-        className={`
-          absolute -inset-[1px] rounded-2xl transition-opacity duration-500
-          ${isHovered ? "opacity-100" : "opacity-0"}
-        `}
-        style={{
-          background: "linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05))",
-        }}
-      />
-
-      <div
-        className={`
-          relative h-full rounded-2xl p-6 md:p-8 transition-all duration-300
-          ${isPrimary ? "bg-white/6 border border-white/15" : "bg-white/6 border border-white/10"}
-          ${isHovered ? "bg-white/8 border-white/25" : ""}
-        `}
-      >
-        <div
-          className={`
-            ${isPrimary ? "w-16 h-16 md:w-20 md:h-20" : "w-12 h-12 md:w-14 md:h-14"} 
-            mb-5 rounded-xl bg-white/10 flex items-center justify-center 
-            transition-colors duration-300
-            ${isHovered ? "bg-white/15" : ""}
-          `}
-        >
-          <feature.icon
-            size={isPrimary ? 32 : 24}
-            className={`transition-colors duration-300 ${isHovered ? "text-white" : "text-white/70"}`}
-          />
-        </div>
-
-        <h3
-          className={`
-          ${isPrimary ? "text-xl md:text-2xl" : "text-lg"} 
-          font-semibold mb-3 text-white
-        `}
-        >
-          {feature.title}
-        </h3>
-
-        <p
-          className={`
-          ${isPrimary ? "text-base" : "text-sm"} 
-          text-gray-400 leading-relaxed transition-colors duration-300
-          ${isHovered ? "text-gray-300" : ""}
-        `}
-        >
-          {feature.description}
-        </p>
-      </div>
-    </motion.div>
-  )
-}
+"use client";
+import { TimelineContent } from "@/components/ui/timeline-animation";
+import { Rocket } from "lucide-react";
+import { useRef } from "react";
+import { useRouter } from "next/navigation";
 
 export function VisionSection() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const heroRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  
+  const revealVariants = {
+    visible: (i: number) => ({
+      y: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+      transition: {
+        delay: i * 0.5,
+        duration: 0.7,
+      },
+    }),
+    hidden: {
+      filter: "blur(10px)",
+      y: 40,
+      opacity: 0,
+    },
+  };
+  
+  const textVariants = {
+    visible: (i: number) => ({
+      filter: "blur(0px)",
+      opacity: 1,
+      transition: {
+        delay: i * 0.3,
+        duration: 0.7,
+      },
+    }),
+    hidden: {
+      filter: "blur(10px)",
+      opacity: 0,
+    },
+  };
+
+  const handleAboutClick = () => {
+    router.push('/about');
+  };
 
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden z-2">
+    <section className="py-24 md:py-32 relative overflow-hidden">
+      {/* Space-themed background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]">
           <div className="absolute inset-0 border border-white/[0.03] rounded-full" />
@@ -127,58 +56,97 @@ export function VisionSection() {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <span className="font-mono text-xs tracking-[0.3em] text-gray-600 uppercase block mb-3">
-            // CORE DIRECTIVES
-          </span>
-          <h2 className="text-4xl md:text-6xl font-bold mb-5 text-white tracking-tight">Our Vision</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-balance text-lg">
-            Empowering the next generation of cybersecurity professionals through immersive, gamified learning
-            experiences that bridge the gap between theory and practice.
-          </p>
-        </motion.div>
+        <div className="max-w-6xl mx-auto" ref={heroRef}>
+          <div className="flex flex-col items-start gap-8">
+            {/* Vision Content */}
+            <div className="flex-1 w-full">
+              <TimelineContent
+                as="div"
+                animationNum={0}
+                timelineRef={heroRef}
+                customVariants={revealVariants}
+                className="mb-8"
+              >
+                <span className="font-mono text-xs tracking-[0.3em] text-gray-600 uppercase block mb-3">
+                  // CORE DIRECTIVES
+                </span>
+                <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight">
+                  Our Vision
+                </h2>
+              </TimelineContent>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
-          <VisionCard
-            feature={features[0]}
-            index={0}
-            isPrimary={true}
-            hoveredIndex={hoveredIndex}
-            setHoveredIndex={setHoveredIndex}
-          />
-          <div className="flex flex-col gap-5">
-            <VisionCard
-              feature={features[1]}
-              index={1}
-              isPrimary={false}
-              hoveredIndex={hoveredIndex}
-              setHoveredIndex={setHoveredIndex}
-            />
-            <VisionCard
-              feature={features[2]}
-              index={2}
-              isPrimary={false}
-              hoveredIndex={hoveredIndex}
-              setHoveredIndex={setHoveredIndex}
-            />
-          </div>
-          <div className="md:mt-12">
-            <VisionCard
-              feature={features[3]}
-              index={3}
-              isPrimary={false}
-              hoveredIndex={hoveredIndex}
-              setHoveredIndex={setHoveredIndex}
-            />
+              <TimelineContent
+                as="h3"
+                animationNum={1}
+                timelineRef={heroRef}
+                customVariants={revealVariants}
+                className="sm:text-3xl text-xl md:text-4xl !leading-[140%] font-semibold text-gray-100 mb-8"
+              >
+                To build a{" "}
+                <TimelineContent
+                  as="span"
+                  animationNum={2}
+                  timelineRef={heroRef}
+                  customVariants={textVariants}
+                  className="text-white border-2 border-white/50 inline-block border-dotted px-2 py-1 rounded-md bg-white/10"
+                >
+                  future-ready
+                </TimelineContent>{" "}
+                and inclusive tech ecosystem where cybersecurity and emerging technology skills are{" "}
+                <TimelineContent
+                  as="span"
+                  animationNum={3}
+                  timelineRef={heroRef}
+                  customVariants={textVariants}
+                  className="text-white border-2 border-white/50 inline-block border-dotted px-2 py-1 rounded-md bg-white/10"
+                >
+                  discovered through play,
+                </TimelineContent>{" "}
+                forged in competition, and celebrated{" "}
+                <TimelineContent
+                  as="span"
+                  animationNum={4}
+                  timelineRef={heroRef}
+                  customVariants={textVariants}
+                  className="text-white border-2 border-white/50 inline-block border-dotted px-2 py-1 rounded-md bg-white/10"
+                >
+                  across the world
+                </TimelineContent>{" "}
+                of digital security.
+              </TimelineContent>
+
+              <div className="mt-12 flex gap-4 justify-between items-end flex-wrap">
+                <TimelineContent
+                  as="div"
+                  animationNum={5}
+                  timelineRef={heroRef}
+                  customVariants={textVariants}
+                  className="mb-4 sm:text-xl text-sm"
+                >
+                  <div className="font-medium text-gray-200 mb-1 capitalize">
+                    Join us on this mission
+                  </div>
+                  <div className="text-gray-400 font-semibold uppercase tracking-wider">
+                    reach for the stars
+                  </div>
+                </TimelineContent>
+
+                <TimelineContent
+                  as="button"
+                  animationNum={6}
+                  timelineRef={heroRef}
+                  customVariants={textVariants}
+                  onClick={handleAboutClick}
+                  className="bg-white text-black hover:bg-gray-200 gap-2 font-medium shadow-lg shadow-white/50 h-12 px-6 rounded-full text-sm inline-flex items-center cursor-pointer hover:shadow-xl hover:shadow-white/70 transition-all duration-300 hover:scale-105"
+                >
+                  <Rocket size={16} className="fill-black" />
+                  About Us
+                </TimelineContent>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
