@@ -52,7 +52,7 @@ function AssassinsCreedBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* Dark mysterious atmosphere */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 to-background" />
+      <div className="absolute inset-0 bg-linear-to-b from-slate-900/80 to-background" />
 
       {/* Subtle glow effects */}
       <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-slate-400/10 rounded-full blur-3xl" />
@@ -77,7 +77,7 @@ function AssassinsCreedBackground() {
       {/* Vertical lines like ancient architecture */}
       <div className="absolute inset-0 flex justify-around opacity-5">
         {[...Array(8)].map((_, i) => (
-          <div key={i} className="w-px h-full bg-gradient-to-b from-transparent via-slate-400 to-transparent" />
+          <div key={i} className="w-px h-full bg-linear-to-b from-transparent via-slate-400 to-transparent" />
         ))}
       </div>
     </div>

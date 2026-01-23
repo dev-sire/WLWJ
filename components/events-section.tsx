@@ -3,32 +3,36 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { Calendar, MapPin, ArrowUpRight } from "lucide-react"
+import Image from "next/image"
 
 const events = [
   {
     id: "pokemon",
-    title: "Pokémon CTF",
+    title: "Hackémon CTF",
+    icon: "/pokemon.png",
     description:
       "Catch vulnerabilities and become the ultimate cyber trainer in this playful yet challenging competition.",
-    date: "March 15, 2026",
-    venue: "Virtual",
+    date: "May 29, 2025",
+    venue: "DUET Gulberg Campus",
     href: "/ctf/pokemon",
   },
   {
     id: "assassins-creed",
     title: "Assassin's Creed CTF",
+    icon: "/assassins.png",
     description:
       "Infiltrate systems with stealth and precision. Uncover ancient digital secrets hidden in the shadows.",
-    date: "April 22, 2026",
-    venue: "Campus Arena",
+    date: "January 5, 2026",
+    venue: "Bano Qabil",
     href: "/ctf/assassins-creed",
   },
   {
     id: "pirates",
     title: "Pirates of the Caribbean CTF",
+    icon: "/pirates.png",
     description: "Navigate treacherous digital seas and plunder encrypted treasures in this high-seas adventure.",
-    date: "May 30, 2026",
-    venue: "Maritime Center",
+    date: "January 10, 2026",
+    venue: "Bano Qabil",
     href: "/ctf/pirates-of-the-caribbean",
   },
 ]
@@ -55,9 +59,9 @@ export function EventsSection() {
           <span className="font-mono text-xs tracking-[0.3em] text-gray-600 uppercase block mb-3">
             // MISSION BRIEFINGS
           </span>
-          <h2 className="text-4xl md:text-6xl font-bold mb-5 text-white tracking-tight">Upcoming Events</h2>
+          <h2 className="text-4xl md:text-6xl font-bold mb-5 text-white tracking-tight">Our Successful Events</h2>
           <p className="text-gray-400 max-w-xl mx-auto text-lg">
-            Join our elite CTF competitions and prove your skills in the digital arena
+            Our elite CTF competitions: Prove your skills in the digital arena
           </p>
         </motion.div>
 
@@ -74,8 +78,8 @@ export function EventsSection() {
                 <div className="bg-black border border-white/20 hover:border-white/35 rounded-2xl p-6 h-full relative overflow-hidden transition-all duration-100 hover:bg-white/[0.08]">
                   <div className="relative z-10">
                     <div className="flex items-start justify-between mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/15 transition-colors">
-                        <span className="text-xl">🎯</span>
+                      <div className="w-16 h-16 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/15 transition-colors">
+                        <Image src={event.icon} alt={event.title} width={52} height={52} />
                       </div>
                       <ArrowUpRight
                         size={20}

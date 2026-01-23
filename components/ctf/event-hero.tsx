@@ -20,14 +20,14 @@ export function EventHero({ title, tagline, date, venue, participants, gradient,
     <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-20">
       {bgPattern}
 
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
+      <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/50 to-background" />
 
       <div className="relative z-10 container mx-auto px-6 text-center py-20">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className={`inline-block px-6 py-2 rounded-full mb-6 bg-gradient-to-r ${gradient} bg-opacity-20`}
+          className={`inline-block px-6 py-2 rounded-full mb-6 bg-linear-to-r ${gradient} bg-opacity-20`}
           style={{ background: `linear-gradient(to right, var(--tw-gradient-stops))` }}
         >
           <span className="text-sm font-medium text-white/90">CTF Event</span>
@@ -39,7 +39,7 @@ export function EventHero({ title, tagline, date, venue, participants, gradient,
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-5xl md:text-7xl font-bold mb-4 tracking-tight"
         >
-          <span className={`bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>{title}</span>
+          <span className={`bg-linear-to-r ${gradient} bg-clip-text text-transparent`}>{title}</span>
         </motion.h1>
 
         <motion.p

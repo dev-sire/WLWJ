@@ -56,7 +56,7 @@ function PiratesBackground() {
       <div className="absolute bottom-1/4 right-1/3 w-[400px] h-[400px] bg-yellow-700/10 rounded-full blur-3xl" />
 
       {/* Stormy sea effect */}
-      <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-slate-900/50 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-linear-to-t from-slate-900/50 to-transparent" />
 
       {/* Parchment texture pattern */}
       <svg className="absolute inset-0 w-full h-full opacity-5" viewBox="0 0 100 100" preserveAspectRatio="none">

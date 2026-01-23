@@ -177,7 +177,7 @@ export function TeamSection() {
               )}
             >
               {/* Background wave animation on hover */}
-              <div className="absolute bottom-0 left-0 right-0 h-1/2 origin-bottom scale-y-0 transform rounded-t-full bg-gradient-to-t from-white/10 to-transparent transition-transform duration-500 group-hover:scale-y-100" />
+              <div className="absolute bottom-0 left-0 right-0 h-1/2 origin-bottom scale-y-0 transform rounded-t-full bg-linear-to-t from-white/10 to-transparent transition-transform duration-500 group-hover:scale-y-100" />
 
               {/* Member Image */}
               <div className="relative z-10 h-28 w-28 overflow-hidden rounded-full border-2 border-white/10 bg-white/5 transition-all duration-300 group-hover:border-white/30 group-hover:scale-105">

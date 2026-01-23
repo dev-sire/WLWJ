@@ -147,7 +147,7 @@ export default function ContactPage() {
       {/* Hero Section with Orbit Animation */}
       <section className="relative pt-42 pb-20 overflow-hidden">
         <OrbitAnimation />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
+        <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/50 to-background" />
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -248,7 +248,7 @@ export default function ContactPage() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
+                      className="w-full bg-linear-to-r from-primary to-accent hover:opacity-90 transition-opacity"
                     >
                       {isSubmitting ? (
                         <motion.div
@@ -279,7 +279,7 @@ export default function ContactPage() {
                 <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
                 <div className="space-y-4">
                   <div className="glass rounded-xl p-4 flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-xl bg-linear-to-br from-primary/20 to-accent/20 flex items-center justify-center">
                       <Mail size={20} className="text-primary" />
                     </div>
                     <div>
@@ -289,7 +289,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="glass rounded-xl p-4 flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-xl bg-linear-to-br from-primary/20 to-accent/20 flex items-center justify-center">
                       <MapPin size={20} className="text-primary" />
                     </div>
                     <div>

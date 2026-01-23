@@ -270,7 +270,7 @@ export default function GalleryPage() {
                           alt={event.title}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
 
                         {/* Type Badge */}
                         <span className="absolute top-4 left-4 px-3 py-1 glass rounded-full text-xs capitalize">

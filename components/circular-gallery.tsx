@@ -17,17 +17,14 @@ export interface GalleryItem {
   };
 }
 
-// Define the props for the CircularGallery component
 interface CircularGalleryProps extends HTMLAttributes<HTMLDivElement> {
-  items: GalleryItem[];
-  /** Controls how far the items are from the center. */
+  items: GalleryItem[]
   radius?: number;
-  /** Controls the speed of auto-rotation when not scrolling. */
   autoRotateSpeed?: number;
 }
 
 const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
-  ({ items, className, radius = 500, autoRotateSpeed = 0.10, ...props }, ref) => {
+  ({ items, className, radius = 500, autoRotateSpeed = 0.30, ...props }, ref) => {
     const [rotation, setRotation] = useState(0);
     const [isScrolling, setIsScrolling] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
@@ -55,7 +52,7 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
         const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
         const scrollProgress = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
         
-        const fullRotations = 3;
+        const fullRotations = 2;
         const scrollRotation = scrollProgress * (360 * fullRotations);
         setRotation(scrollRotation);
 
@@ -120,8 +117,8 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
             const opacity = Math.max(0.3, 1 - (normalizedAngle / 180));
 
             // Responsive card sizing
-            const cardWidth = isMobile ? 200 : 300;
-            const cardHeight = isMobile ? 280 : 400;
+            const cardWidth = isMobile ? 150 : 300;
+            const cardHeight = isMobile ? 200 : 400;
 
             return (
               <div
@@ -149,13 +146,13 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
                     style={{ objectPosition: item.photo.pos || 'center' }}
                   />
                   {/* Space-themed gradient overlay */}
-                  <div className={`absolute bottom-0 left-0 w-full ${isMobile ? 'p-2' : 'p-4'} bg-gradient-to-t from-black via-black/80 to-transparent text-white`}>
+                  <div className={`absolute bottom-0 left-0 w-full ${isMobile ? 'p-2' : 'p-4'} bg-linear-to-t from-black via-black/80 to-transparent text-white`}>
                     <h2 className={`${isMobile ? 'text-sm' : 'text-xl'} font-bold tracking-wide`}>{item.title}</h2>
                     <p className={`${isMobile ? 'text-xs' : 'text-sm'} italic opacity-80 text-cyan-300`}>{item.subtitle}</p>
-                    <p className={`${isMobile ? 'text-[10px]' : 'text-xs'} mt-1 opacity-70 font-mono`}>Image: {item.photo.credit}</p>
+                    {/* <p className={`${isMobile ? 'text-[10px]' : 'text-xs'} mt-1 opacity-70 font-mono`}>Image: {item.photo.credit}</p> */}
                   </div>
                   {/* Cosmic glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-600/10 via-transparent to-purple-600/10 pointer-events-none" />
+                  <div className="absolute inset-0 bg-linear-to-t from-blue-600/10 via-transparent to-purple-600/10 pointer-events-none" />
                 </div>
               </div>
             );
@@ -181,16 +178,6 @@ const spaceGalleryData: GalleryItem[] = [
     }
   },
   {
-    title: 'Hackemon CTF',
-    subtitle: 'DUET Gulberg Campus',
-    photo: {
-      url: '/pic-3.jpg',
-      text: 'A Pokemon themed CTF',
-      pos: '50% 50%',
-      credit: 'Hubble Space Telescope'
-    }
-  },
-  {
     title: 'TeknoFest 3.0',
     subtitle: 'Innovation Expo',
     photo: {
@@ -205,6 +192,16 @@ const spaceGalleryData: GalleryItem[] = [
     subtitle: 'Tech Gala 1.0',
     photo: {
       url: '/pic-9.jpeg',
+      text: 'Bano Qabil',
+      pos: '50% 50%',
+      credit: 'Deep Field Survey'
+    }
+  },
+  {
+    title: 'Random Shot',
+    subtitle: 'TecknoFest 3.0',
+    photo: {
+      url: '/pic-16.jpeg',
       text: 'Bano Qabil',
       pos: '50% 50%',
       credit: 'Deep Field Survey'
@@ -254,28 +251,28 @@ const spaceGalleryData: GalleryItem[] = [
 
 export function SpaceGallerySection() {
   return (
-    // This outer container provides the scrollable height
     <div className="w-full bg-black text-white relative" style={{ height: '500vh' }}>
-      {/* Starfield background effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white rounded-full opacity-70 animate-pulse" />
         <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-white rounded-full opacity-50" />
         <div className="absolute bottom-1/3 left-1/2 w-1 h-1 bg-blue-300 rounded-full opacity-60 animate-pulse" />
         <div className="absolute top-2/3 right-1/4 w-1 h-1 bg-purple-300 rounded-full opacity-40" />
       </div>
-
-      {/* This inner container sticks to the top while scrolling */}
-      <div className="w-full h-screen sticky top-0 flex flex-col items-center justify-center overflow-hidden">
-        <div className="text-center mb-12 absolute top-16 z-10">
-          <span className="font-mono text-xs tracking-[0.3em] text-gray-600 uppercase block mb-3">
-            // COSMIC EXPLORATION
-          </span>
-          <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-            Journey Through Space
-          </h1>
-          <p className="text-gray-400 mt-2 text-sm md:text-base">Scroll to explore the cosmos</p>
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        <div className="absolute top-10 inset-x-0 z-30 flex justify-center pointer-events-none">
+          <div className="text-center">
+            <span className="font-mono text-xs tracking-[0.3em] text-gray-500 uppercase block mb-3">
+              // COSMIC EXPLORATION
+            </span>
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+              Event Gallery
+            </h1>
+            <p className="text-gray-400 mt-2 text-sm md:text-base">
+              Scroll to explore the cosmos
+            </p>
+          </div>
         </div>
-        <div className="w-full h-full">
+        <div className="relative z-10 h-full pt-40">
           <CircularGallery items={spaceGalleryData} />
         </div>
       </div>
