@@ -224,7 +224,7 @@ export function HeroSection() {
           animate="visible"
           className="max-w-2xl mx-auto text-lg md:text-xl text-gray-400 mb-10 font-light tracking-wide"
         >
-          Forging Cyber Warriors Through Space-Grade Challenges
+          We Rise as One, We PWN as One
         </motion.p>
 
         <motion.div
