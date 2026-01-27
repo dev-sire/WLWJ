@@ -65,7 +65,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "Syed Usaiym Junaid",
-    designation: "Farigh 6",
+    designation: "Community Manager",
     imageSrc: "/usaiym.jpg",
     socialLinks: [
       { icon: Twitter, href: "#" },
