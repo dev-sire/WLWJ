@@ -20,7 +20,7 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     name: "Abdul Wasay Khan",
-    designation: "Farigh 1",
+    designation: "Lead",
     imageSrc: "/wasay-2.jpg",
     socialLinks: [
       { icon: Twitter, href: "#" },
@@ -29,7 +29,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "Rabia Ishtiaq",
-    designation: "Farigh 2",
+    designation: "Co-Lead",
     imageSrc: "/rabia.jpeg",
     socialLinks: [
       { icon: Github, href: "#" },
@@ -38,7 +38,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "Hafsah Anwaar Ali",
-    designation: "Farigh 3",
+    designation: "Digital Marketing Manager",
     imageSrc: "/hafsa.jpg",
     socialLinks: [
       { icon: Linkedin, href: "#" },
@@ -47,7 +47,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "Ammara Qazi",
-    designation: "Farigh 4",
+    designation: "Growth Lead",
     imageSrc: "/ammara.jpeg",
     socialLinks: [
       { icon: Twitter, href: "#" },
@@ -56,7 +56,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "Ubaid Raza",
-    designation: "Farigh 5",
+    designation: "Visual Media Lead",
     imageSrc: "/ubaid.jpg",
     socialLinks: [
       { icon: Github, href: "#" },
@@ -74,7 +74,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "Sofia Asif",
-    designation: "Farigh 7",
+    designation: "Junior Developer",
     imageSrc: "/sofia.jpeg",
     socialLinks: [
       { icon: Github, href: "#" },
@@ -83,7 +83,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "Aman Shahid",
-    designation: "Farigh 8",
+    designation: "Technical Director",
     imageSrc: "/aman.jpg",
     socialLinks: [
       { icon: Instagram, href: "#" },
