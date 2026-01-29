@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -20,11 +21,15 @@ const navLinks = [
 ]
 
 export function Navbar() {
+  const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [eventsOpen, setEventsOpen] = useState(false)
   const [mobileEventsOpen, setMobileEventsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+
+  // Check if current page is a CTF route
+  const isCTFRoute = pathname?.startsWith('/ctf')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,15 +49,27 @@ export function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
+  // Dynamic navbar background based on route and scroll state
+  const getNavbarClasses = () => {
+    if (scrolled) {
+      if (isCTFRoute) {
+        // Glassmorphic design for CTF routes
+        return "bg-black/30 backdrop-blur-xl border-b border-white/20 py-3 shadow-lg"
+      } else {
+        // Solid black for other routes
+        return "bg-black/90 backdrop-blur-md border-b border-white/10 py-3"
+      }
+    }
+    return "bg-transparent py-5"
+  }
+
   return (
     <>
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.4 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-black/90 backdrop-blur-md border-b border-white/10 py-3" : "bg-transparent py-5"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${getNavbarClasses()}`}
       >
         <nav className="container mx-auto px-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
@@ -86,7 +103,11 @@ export function Navbar() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 8 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute top-full left-0 mt-2 w-64 bg-black border border-white/10 rounded-lg shadow-lg overflow-hidden"
+                    className={`absolute top-full left-0 mt-2 w-64 rounded-lg shadow-lg overflow-hidden ${
+                      isCTFRoute 
+                        ? "bg-black/40 backdrop-blur-xl border border-white/20" 
+                        : "bg-black border border-white/10"
+                    }`}
                   >
                     {eventLinks.map((link) => (
                       <Link
@@ -136,7 +157,9 @@ export function Navbar() {
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 md:hidden"
           >
-            <div className="absolute inset-0 bg-black" />
+            <div className={`absolute inset-0 ${
+              isCTFRoute ? "bg-black/40 backdrop-blur-xl" : "bg-black"
+            }`} />
             <nav className="relative pt-24 px-6 flex flex-col gap-4">
               <Link
                 href="/"

@@ -24,7 +24,7 @@ export function Scoreboard({ teams, accentColor }: ScoreboardProps) {
   const icons = [Medal, Trophy, Award]
 
   return (
-    <section className="py-24 relative">
+    <section className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -33,7 +33,7 @@ export function Scoreboard({ teams, accentColor }: ScoreboardProps) {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4">Scoreboard</h2>
-          <p className="text-muted-foreground">Final standings from the competition</p>
+          <p className="text-white">Final standings from the competition</p>
         </motion.div>
 
         {/* Podium */}

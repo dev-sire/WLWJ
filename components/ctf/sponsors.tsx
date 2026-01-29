@@ -26,7 +26,7 @@ export function Sponsors({ sponsors }: SponsorsProps) {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4">Our Sponsors</h2>
-          <p className="text-muted-foreground">Thanks to our amazing partners</p>
+          <p className="text-white">Thanks to our amazing partners</p>
         </motion.div>
 
         {platinum.length > 0 && (

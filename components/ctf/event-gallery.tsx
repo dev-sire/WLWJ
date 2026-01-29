@@ -41,7 +41,7 @@ export function EventGallery({ images }: EventGalleryProps) {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4">Event Gallery</h2>
-          <p className="text-muted-foreground">Moments captured from the competition</p>
+          <p className="text-white">Moments captured from the competition</p>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

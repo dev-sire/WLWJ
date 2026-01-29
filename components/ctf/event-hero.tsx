@@ -20,7 +20,7 @@ export function EventHero({ title, tagline, date, venue, participants, gradient,
     <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-20">
       {bgPattern}
 
-      <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/50 to-background" />
+      {/* <div className="absolute inset-0" /> */}
 
       <div className="relative z-10 container mx-auto px-6 text-center py-20">
         <motion.div
@@ -46,7 +46,7 @@ export function EventHero({ title, tagline, date, venue, participants, gradient,
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
+          className="text-xl text-white max-w-2xl mx-auto mb-10"
         >
           {tagline}
         </motion.p>

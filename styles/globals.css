@@ -3,6 +3,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: 'Pokemon';
+  src: url('Pokemon.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -121,5 +129,10 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+@layer utilities {
+  .font-pokemon {
+    font-family: 'Pokemon', sans-serif;
   }
 }
