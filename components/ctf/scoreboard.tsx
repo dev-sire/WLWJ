@@ -52,7 +52,7 @@ export function Scoreboard({ teams, accentColor }: ScoreboardProps) {
                 transition={{ delay: i * 0.2 }}
                 className="flex flex-col items-center"
               >
-                <div className="glass rounded-2xl p-4 mb-4 text-center min-w-[140px]">
+                <div className="glass rounded-2xl p-4 mb-4 text-center min-w-35">
                   <Icon
                     size={32}
                     className={
@@ -63,7 +63,7 @@ export function Scoreboard({ teams, accentColor }: ScoreboardProps) {
                           : "text-amber-700 mx-auto mb-2"
                     }
                   />
-                  <h3 className="font-semibold text-sm mb-1 truncate max-w-[120px]">{team.name}</h3>
+                  <h3 className="font-semibold text-sm mb-1 truncate max-w-35">{team.name}</h3>
                   <p className="text-2xl font-bold" style={{ color: accentColor }}>
                     {team.points}
                   </p>
@@ -83,7 +83,7 @@ export function Scoreboard({ teams, accentColor }: ScoreboardProps) {
         {/* Rest of leaderboard */}
         <div className="max-w-2xl mx-auto">
           <div className="glass rounded-2xl overflow-hidden">
-            <div className="grid grid-cols-4 gap-4 p-4 border-b border-white/10 text-sm font-medium text-muted-foreground">
+            <div className="grid grid-cols-4 gap-4 p-4 border-b border-white/10 text-sm font-medium text-yellow-500">
               <span>Rank</span>
               <span className="col-span-2">Team</span>
               <span className="text-right">Points</span>
@@ -97,7 +97,7 @@ export function Scoreboard({ teams, accentColor }: ScoreboardProps) {
                 transition={{ delay: index * 0.05 }}
                 className="grid grid-cols-4 gap-4 p-4 border-b border-white/5 hover:bg-white/5 transition-colors"
               >
-                <span className="text-muted-foreground">#{team.rank}</span>
+                <span className="text-yellow-500">#{team.rank}</span>
                 <span className="col-span-2 font-medium">{team.name}</span>
                 <span className="text-right" style={{ color: accentColor }}>
                   {team.points}

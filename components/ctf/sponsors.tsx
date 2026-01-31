@@ -25,13 +25,13 @@ export function Sponsors({ sponsors }: SponsorsProps) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Our Sponsors</h2>
-          <p className="text-white">Thanks to our amazing partners</p>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">Our Collaborative Partners</h2>
+          <p className="text-white">Thanks to our amazing partners & sponsors</p>
         </motion.div>
 
         {platinum.length > 0 && (
           <div className="mb-12">
-            <h3 className="text-center text-sm uppercase tracking-wider text-muted-foreground mb-6">Platinum</h3>
+            <h3 className="text-center text-sm uppercase tracking-wider text-white mb-6">Platinum</h3>
             <div className="flex flex-wrap justify-center gap-6">
               {platinum.map((sponsor, index) => (
                 <motion.div
@@ -40,7 +40,7 @@ export function Sponsors({ sponsors }: SponsorsProps) {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="glass glass-hover rounded-xl p-8 min-w-[200px] text-center ring-2 ring-primary/30"
+                  className="glass glass-hover rounded-xl p-8 min-w-50 text-center ring-2 ring-primary/30"
                 >
                   <span className="text-lg font-semibold">{sponsor.name}</span>
                 </motion.div>

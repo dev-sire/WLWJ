@@ -207,7 +207,7 @@ export function HeroSection() {
           <span className="text-sm font-medium text-gray-300">Student-led Cybersecurity Excellence</span>
         </motion.div>
 
-        <motion.h1
+        {/* <motion.h1
           custom={2}
           variants={fadeUpVariants}
           initial="hidden"
@@ -215,7 +215,18 @@ export function HeroSection() {
           className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-linear-to-b from-white via-white to-gray-600"
         >
           WLWJ
-        </motion.h1>
+        </motion.h1> */}
+
+        <motion.div
+          custom={2}
+          variants={fadeUpVariants}
+          initial="hidden"
+          animate="visible"
+          className="flex items-center justify-center mb-6"
+        >
+          <img src="/logo.png" alt="wlwj logo" className="w-full h-full" />
+        </motion.div>
+
 
         <motion.p
           custom={3}

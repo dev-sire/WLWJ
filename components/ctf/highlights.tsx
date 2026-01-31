@@ -47,7 +47,7 @@ export function Highlights({ highlights, accentColor }: HighlightsProps) {
               <p className="text-3xl font-bold mb-1" style={{ color: accentColor }}>
                 {highlight.value}
               </p>
-              <p className="text-sm text-muted-foreground">{highlight.label}</p>
+              <p className="text-sm text-white">{highlight.label}</p>
             </motion.div>
           ))}
         </div>
