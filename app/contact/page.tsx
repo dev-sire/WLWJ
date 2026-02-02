@@ -20,6 +20,10 @@ interface Star {
   speed: number
 }
 
+// This comment is intentionally left for Miss Sofia Little, 
+// our guide for the project, 
+// She will hopefully show her amazing coding skills and creativity.
+
 function OrbitAnimation() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 

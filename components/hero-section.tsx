@@ -217,16 +217,30 @@ export function HeroSection() {
           WLWJ
         </motion.h1> */}
 
+        {/* <motion.div
+          custom={2}
+          variants={fadeUpVariants}
+          initial="hidden"
+          animate="visible"
+          className="flex items-center justify-center mb-6 bg-red-500 w-[3rem] h-[3rem]"
+        >
+          <img src="/logos.svg" alt="wlwj logo" className="w-full h-full" />
+        </motion.div> */}
+
+        // Fix the positioning and size of the logo here
         <motion.div
           custom={2}
           variants={fadeUpVariants}
           initial="hidden"
           animate="visible"
-          className="flex items-center justify-center mb-6"
+          className="flex items-center justify-center rounded-xl md:w-[350px] md:h-[350px] mb-6"
         >
-          <img src="/logo.png" alt="wlwj logo" className="w-full h-full" />
+          <img
+            src="/logos.svg"
+            alt="WLWJ logo"
+            className="w-full h-full p-2 object-contain"
+          />
         </motion.div>
-
 
         <motion.p
           custom={3}
