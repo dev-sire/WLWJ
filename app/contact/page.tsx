@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import { sendEmail } from "@/utils/emailservice";
 import { useState, useRef, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Navbar } from "@/components/navbar"
@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { toast } from "sonner" // or react-hot-toast
 import { Send, Mail, MapPin, Github, Twitter, Linkedin, CheckCircle } from "lucide-react"
 
 interface Star {
@@ -125,17 +126,52 @@ export default function ContactPage() {
     message: "",
   })
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
 
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    setFormData({ name: "", email: "", organization: "", message: "" })
+  if (isSubmitting) return
+
+  // 🧪 Client-side validation (UX)
+  if (!formData.name || !formData.email || !formData.message) {
+    toast.error("Please fill in all required fields")
+    return
   }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    toast.error("Please enter a valid email address")
+    return
+  }
+
+  setIsSubmitting(true)
+
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    })
+
+    if (!res.ok) {
+      const err = await res.json()
+      throw new Error(err.error || "Something went wrong")
+    }
+
+    toast.success("Message sent successfully!")
+    setIsSubmitted(true)
+    setFormData({
+      name: "",
+      email: "",
+      organization: "",
+      message: "",
+    })
+  } catch (error: any) {
+    toast.error(error.message || "Failed to send message")
+  } finally {
+    setIsSubmitting(false)
+  }
+}
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
@@ -288,7 +324,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Email</p>
-                      <p className="font-medium">contact@wlwj.org</p>
+                      <p className="font-medium">wlwj.2027@gmail.com</p>
                     </div>
                   </div>
 
@@ -298,7 +334,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Location</p>
-                      <p className="font-medium">University Campus, Tech Building</p>
+                      <p className="font-medium">Dawood University Of Enginnering And Technology</p>
                     </div>
                   </div>
                 </div>
