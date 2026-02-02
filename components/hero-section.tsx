@@ -227,7 +227,7 @@ export function HeroSection() {
           <img src="/logos.svg" alt="wlwj logo" className="w-full h-full" />
         </motion.div> */}
 
-        // Fix the positioning and size of the logo here
+        
         <motion.div
           custom={2}
           variants={fadeUpVariants}
