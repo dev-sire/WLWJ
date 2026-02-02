@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { motion, Variants } from "framer-motion"
 import { ArrowRight, Shield } from "lucide-react"
+import Link from "next/link"
 
 const StarfieldCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -226,19 +227,18 @@ export function HeroSection() {
         >
           <img src="/logos.svg" alt="wlwj logo" className="w-full h-full" />
         </motion.div> */}
-
         
         <motion.div
           custom={2}
           variants={fadeUpVariants}
           initial="hidden"
           animate="visible"
-          className="flex items-center justify-center rounded-xl md:w-[350px] md:h-[350px] mb-6"
+          className="inline-flex sm:flex items-center justify-center rounded-xl w-[200px] h-[200px] md:w-[350px] md:h-[350px] mb-6"
         >
           <img
             src="/logos.svg"
             alt="WLWJ logo"
-            className="w-full h-full p-2 object-contain"
+            className="w-full h-full p-2 object-contain flex items-center justify-center"
           />
         </motion.div>
 
@@ -268,7 +268,9 @@ export function HeroSection() {
           <button
             className="border border-white/20 text-white hover:bg-white/10 px-8 py-3 rounded-md text-base bg-transparent transition-colors duration-200"
           >
-            Contact Us
+            <Link href="/contact">
+              Contact Us
+            </Link>
           </button>
         </motion.div>
       </div>

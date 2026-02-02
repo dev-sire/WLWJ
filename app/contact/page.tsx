@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-import { sendEmail } from "@/utils/emailservice";
 import { useState, useRef, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Navbar } from "@/components/navbar"
@@ -10,8 +9,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { toast } from "sonner" // or react-hot-toast
-import { Send, Mail, MapPin, Github, Twitter, Linkedin, CheckCircle } from "lucide-react"
+import { toast } from "sonner"
+import { Send, Mail, MapPin, Github, Linkedin, CheckCircle, Instagram } from "lucide-react"
 
 interface Star {
   x: number
@@ -20,10 +19,6 @@ interface Star {
   opacity: number
   speed: number
 }
-
-// This comment is intentionally left for Miss Sofia Little, 
-// our guide for the project, 
-// She will hopefully show her amazing coding skills and creativity.
 
 function OrbitAnimation() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -126,52 +121,90 @@ export default function ContactPage() {
     message: "",
   })
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
+    if (isSubmitting) return
 
-  if (isSubmitting) return
-
-  // 🧪 Client-side validation (UX)
-  if (!formData.name || !formData.email || !formData.message) {
-    toast.error("Please fill in all required fields")
-    return
-  }
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-    toast.error("Please enter a valid email address")
-    return
-  }
-
-  setIsSubmitting(true)
-
-  try {
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    })
-
-    if (!res.ok) {
-      const err = await res.json()
-      throw new Error(err.error || "Something went wrong")
+    // 🧪 Client-side validation (UX)
+    if (!formData.name || !formData.email || !formData.message) {
+      toast.error("Please fill in all required fields")
+      return
     }
 
-    toast.success("Message sent successfully!")
-    setIsSubmitted(true)
-    setFormData({
-      name: "",
-      email: "",
-      organization: "",
-      message: "",
-    })
-  } catch (error: any) {
-    toast.error(error.message || "Failed to send message")
-  } finally {
-    setIsSubmitting(false)
-  }
-}
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      toast.error("Please enter a valid email address")
+      return
+    }
 
+    setIsSubmitting(true)
+
+    const SCRIPT_URL = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
+
+    if (!SCRIPT_URL) {
+      console.error("Script URL is missing!");
+      return;
+    }
+
+    try {
+      // We convert the state object into a Query String for the Google Script
+      const queryString = new URLSearchParams({
+        name: formData.name,
+        email: formData.email,
+        organization: formData.organization,
+        message: formData.message
+      }).toString();
+
+      // Sending data to Google Sheets + Email
+      const res = await fetch(`${SCRIPT_URL}?${queryString}`, {
+        method: "POST",
+        mode: "no-cors", // Required for Google Scripts to avoid CORS preflight blocks
+      })
+
+      // Note: With 'no-cors', res.ok will always be false and res.status will be 0.
+      // This is a limitation of the browser security model for opaque responses.
+      // If the catch block isn't triggered, the request likely went through.
+
+      toast.success("Message sent successfully!")
+      setIsSubmitted(true)
+      setFormData({
+        name: "",
+        email: "",
+        organization: "",
+        message: "",
+      })
+    } catch (error: any) {
+      toast.error(error.message || "Failed to send message")
+    } finally {
+      setIsSubmitting(false)
+    }
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+
+      if (!res.ok) {
+        const err = await res.json()
+        throw new Error(err.error || "Something went wrong")
+      }
+
+      toast.success("Message sent successfully!")
+      setIsSubmitted(true)
+      setFormData({
+        name: "",
+        email: "",
+        organization: "",
+        message: "",
+      })
+    } catch (error: any) {
+      toast.error(error.message || "Failed to send message")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
@@ -260,7 +293,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="organization">Organization (Optional)</Label>
+                      <Label htmlFor="organization">Organization / Institue (Optional)</Label>
                       <Input
                         id="organization"
                         name="organization"
@@ -288,7 +321,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-linear-to-r from-primary to-accent hover:opacity-90 transition-opacity"
+                      className="w-full bg-linear-to-r from-primary to-primary/10 hover:opacity-90 transition-opacity"
                     >
                       {isSubmitting ? (
                         <motion.div
@@ -344,21 +377,24 @@ const handleSubmit = async (e: React.FormEvent) => {
                 <h3 className="text-lg font-semibold mb-4">Connect With Us</h3>
                 <div className="flex gap-4">
                   <a
-                    href="#"
+                    href="https://github.com/WLWJ27"
+                    target="_blank"
                     className="w-12 h-12 glass glass-hover rounded-xl flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
                     aria-label="GitHub"
                   >
                     <Github size={20} />
                   </a>
                   <a
-                    href="#"
+                    href="https://www.instagram.com/wlwj27/"
+                    target="_blank"
                     className="w-12 h-12 glass glass-hover rounded-xl flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                    aria-label="Twitter"
+                    aria-label="Instagram"
                   >
-                    <Twitter size={20} />
+                    <Instagram size={20} />
                   </a>
                   <a
-                    href="#"
+                    href="https://www.linkedin.com/company/wlwj/"
+                    target="_blank"
                     className="w-12 h-12 glass glass-hover rounded-xl flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
                     aria-label="LinkedIn"
                   >
